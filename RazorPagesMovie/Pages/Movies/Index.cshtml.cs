@@ -20,7 +20,7 @@ namespace RazorPagesMovie.Pages.Movies
             _context = context;
         }
 
-        public IList<Movie> Movie { get;set; } = default!;
+        public IList<Movie> Movie { get; set; } = default!;
 
         [BindProperty(SupportsGet = true)]
         public string? SearchString { get; set; }
@@ -29,6 +29,8 @@ namespace RazorPagesMovie.Pages.Movies
 
         [BindProperty(SupportsGet = true)]
         public string? MovieGenre { get; set; }
+
+
 
         public async Task OnGetAsync()
         {
@@ -49,9 +51,10 @@ namespace RazorPagesMovie.Pages.Movies
             {
                 movies = movies.Where(x => x.Genre == MovieGenre);
             }
+
             Genres = new SelectList(await genreQuery.Distinct().ToListAsync());
             Movie = await movies.ToListAsync();
-        }
+
         }
     }
 }
